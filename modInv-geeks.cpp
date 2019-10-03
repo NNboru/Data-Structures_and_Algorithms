@@ -10,23 +10,29 @@ typedef long long ll;
 int modInv(int a, int m)
 {
     int m0 = m;
-    int y = 0, x = 1;
+    int y = 0, x = 1, t;
     while (a > 1)
     {
-        // q is quotient
-        int q = a / m,t = m;
-        // m is remainder now, process same as Euclid's algo
-        m = a % m, a = t;
-        t = y;
         // Update y and x
-        y = x - q * y;
+        t = y;
+        y = x - (a/m0) * y;
         x = t;
+        t = m0;
+        // m is remainder now, process same as Euclid's algo
+        m0 = a % m0;
+		a = t;
     }
     if (x < 0)
-       x += m0;
+       x += m;
     return x;
 }
 
+main()
+{
+	int m=11;
+	for(int i=1;i<m;i++)
+		pr modInv(i,m) sp;
+}
 
 int bez(int a,int m)
 {
