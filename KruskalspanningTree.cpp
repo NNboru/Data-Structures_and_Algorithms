@@ -13,11 +13,11 @@ using namespace std;
 typedef long long ll;
 
 // taking N<100001
-int tsize[100001],treeind[100001],N;
+int tsize[100001],treeind[100001],N,M;
 vector<int> nbr[100001],tree[100001];
-vector<pair<int,pii>> wtlist;
+pair<int,pii> wtlist[100001];
 
-// needs- N, wtlist or nbr, tree, treeind, tsize. Complexity - O(E + V*log(V)).
+// needs- N,M wtlist or nbr, tree, treeind, tsize. Complexity - O(E + V*log(V)).
 vector<pii> spanningTree()
 {
 	for(int i=1;i<=N;i++)// clear
@@ -36,10 +36,10 @@ vector<pii> spanningTree()
 		for(int n2:nbr[n1])
 			if(treeind[n1]!=treeind[n2]) ...
 	*/
-	for(auto p:wtlist)
+	for(int wt=0; wt<M ;wt++)
 	{
-		n1=p.second.first;
-		n2=p.second.second;
+		n1=wtlist[wt].second.first;
+		n2=wtlist[wt].second.second;
 		if(treeind[n1]!=treeind[n2])
 		{
 			ans.push_back({n1,n2});// ans+=p.first; //for min wt
@@ -61,19 +61,19 @@ vector<pii> spanningTree()
 main()
 {
 	ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-	int M,n1,n2,w ;
+	int n1,n2,w,cnt=0 ;
 	
 	cin>>N>>M ;
 	fr(i,M)
 	{
 		cin>>n1>>n2 >>w;
 		nbr[n1].push_back(n2);
-		nbr[n2].push_back(n1); // for spanning tree this line not needed.
+		// nbr[n2].push_back(n1); // for spanning tree this line does not matter.
 		
-		wtlist.push_back({w,{n1,n2}});
+		wtlist[cnt++]={w,{n1,n2}};
 	}
 	
-	sort(wtlist.begin(),wtlist.end());
+	sort(wtlist,wtlist+M);
 	
 	auto ans= spanningTree();
 	
