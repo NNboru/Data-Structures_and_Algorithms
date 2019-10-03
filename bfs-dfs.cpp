@@ -14,8 +14,8 @@
 using namespace std;
 typedef long long ll;
 
-int ar[100001];
-vector<int> nbr[100001];
+int ar[100001],order[100001];
+umap<int,vector<int>> nbr;
 bool chk[100001];
 
 // ar, chk, nbr.
@@ -46,29 +46,41 @@ void bfs()
 	
 }
 
-void dfs()
+dfs(int root=1)
 {
-	//dfs - ( ar-temp, nbr, chk-marking visited. )
-	ar[0]=1;
-	chk[1]=1;
-	int last=0;
-	bool a;
-	while(last>=0)
-	{
-		a=1;
-		for(int i:nbr[ar[last]])
-			if(chk[i]==0)
-			{
-				chk[i]=1;
-				ar[++last]=i;
-				//process node=i.
-				a=0;
-				break;
-			}
-		if(a)
-			last--;//backtrack-delete last node.
-	}
+	// static int ind=0;
+	// order[ind++]=root;
+	chk[root]=1;
+	for(int nd:nbr[root])
+		if(chk[nd]==0)
+		{
+			// par[nd]=root;
+			dfs(nd);
+		}
 	
+	
+}
+
+void dfs2()
+{
+	int ind=-1,ind2=0,pos=0,ver;
+	int root=1;
+	ar[++ind]=root;
+	while(ind>=0)
+	{
+		ver=ar[ind--];
+		if(chk[ver]==0)
+		{
+			chk[ver]=1;
+			// order[ind2++]=ver;
+		}
+		for(auto i=nbr[ver].rbegin();i<nbr[ver].rend();++i)
+			if(chk[*i]==0)
+			{
+				ar[++ind]=*i;
+				// par[*i]=ver;
+			}
+	}
 }
 
 main()
@@ -82,13 +94,21 @@ main()
 			nbr[n1].push_back(n2);
 			nbr[n2].push_back(n1);
 		}
-		bfs();
-		
+		dfs();
+		fr(i,n) pr order[i] sp;
 		// pr "bfs: ";for(int i=0;i<n;i++) pr ar[i] sp;pr endl;//pppppppppppppppppppppppppp
 		
 }
 
+/*
+6
+1 2
+1 3
+2 4
+2 5
+2 6
 
+*/
 
 
 
