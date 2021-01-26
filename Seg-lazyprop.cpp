@@ -19,7 +19,7 @@ QUERY  L R   -> 2 L R
 using namespace std;
 typedef long long ll;
 
-int tree[MAX],extra[MAX],k ;
+int tree[MAX],extra[MAX] ;
 
 int buildtree(int ind,int L,int R)
 {
@@ -28,7 +28,7 @@ int buildtree(int ind,int L,int R)
 		cin>>tree[ind];
 		return tree[ind];
 	}
-	tree[ind]= buildtree(ind*2,L,(L+R)/2) + buildtree(ind*2+1,(L+R)/2+1,R) ;
+	tree[ind]= buildtree(ind<<1,L,(L+R)>>1) + buildtree((ind<<1)+1,((L+R)>>1)+1,R) ;
 	return tree[ind];
 }
 int query(int ind,int L,int R,int l,int r,int ex)
@@ -37,11 +37,11 @@ int query(int ind,int L,int R,int l,int r,int ex)
 		return tree[ind]+ (ex+extra[ind])*(R-L+1);
 	int mid=(L+R)>>1;
 	if(r<=mid)
-		return query(ind*2,L,mid,l,r,ex+extra[ind]);
+		return query(ind<<1,L,mid,l,r,ex+extra[ind]);
 	else if(l>mid)
-		return query(ind*2+1,mid+1,R,l,r,ex+extra[ind]);
+		return query((ind<<1)+1,mid+1,R,l,r,ex+extra[ind]);
 	else
-		return query(ind*2,L,mid,l,mid,ex+extra[ind]) + query(ind*2+1,mid+1,R,mid+1,r,ex+extra[ind]);
+		return query(ind<<1,L,mid,l,mid,ex+extra[ind]) + query((ind<<1)+1,mid+1,R,mid+1,r,ex+extra[ind]);
 }
 void update(int ind,int L,int R, int l,int r,int val)
 {
@@ -53,13 +53,13 @@ void update(int ind,int L,int R, int l,int r,int val)
 	tree[ind]+=val*(r-l+1);
 	int mid=(L+R)>>1;
 	if(r<=mid)
-		update(ind*2,L,mid,l,r,val);
+		update(ind<<1,L,mid,l,r,val);
 	else if(l>mid)
-		update(ind*2+1,mid+1,R,l,r,val);
+		update((ind<<1)+1,mid+1,R,l,r,val);
 	else
 	{
-		update(ind*2,L,mid,l,mid,val);
-		update(ind*2+1,mid+1,R,mid+1,r,val);
+		update(ind<<1,L,mid,l,mid,val);
+		update((ind<<1)+1,mid+1,R,mid+1,r,val);
 	}
 }
 

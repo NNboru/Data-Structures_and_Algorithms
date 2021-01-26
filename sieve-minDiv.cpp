@@ -28,11 +28,9 @@ void build_sieve(int n) {
 		{
 			prm[pcnt++]=i;
 			mind[i]=i;
-			mi = i;
 		}
-		else mi=mind[i];
 		j=0;
-		while(j<pcnt && prm[j]<=mi)
+		while(j<pcnt && prm[j]<=mind[i])
 		{
 			if( (pd=i*prm[j]) >n) break;
 			mind[pd] = prm[j];
@@ -53,7 +51,7 @@ void facs(int ind,int prod)
 		{
 			d=prod*divs[ind][i];
 			// d is the factor generated.
-			pr d en;
+			pr d sp;
 		}
 	}
 	else
@@ -78,12 +76,12 @@ int factors(int n)
 		if(mind[num]==old)
 		{
 			divs[cnt][sz[cnt]]=divs[cnt][sz[cnt]-1]*old;
-			sz[cnt]++;
+			++sz[cnt];
 			num/=old;
 		}
 		else
 		{
-			cnt++;
+			++cnt;
 			old=mind[num];
 		}
 	}
@@ -92,7 +90,7 @@ int factors(int n)
 
 main()
 {
-	ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+	//ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 	int t,N;
 	N=60 ;
 	build_sieve(100000);

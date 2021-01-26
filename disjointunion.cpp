@@ -30,6 +30,7 @@ bool merge(int n1, int n2)
 		for(int i:tree[tr2])
 			treeind[i]=tr1;
 		tsize[tr1]+=tsize[tr2];
+		tsize[tr2]=0;
 		tree[tr1].insert(tree[tr1].end(),tree[tr2].begin(),tree[tr2].end());
 		return 1;
 	}
@@ -40,7 +41,7 @@ bool merge(int n1, int n2)
 main()
 {
 	ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-	int n,m,n1,n2 ;
+	int n1,n2 ;
 	
 	cin>>N>>M ;
 	fr(i,M)

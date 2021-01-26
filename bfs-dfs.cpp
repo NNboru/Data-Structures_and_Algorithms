@@ -14,10 +14,10 @@
 using namespace std;
 typedef long long ll;
 
-int ar[100001],order[100001];
-umap<int,vector<int>> nbr;
+int ar[100001];// order[100001],tin[100001],tout[100001],time=1;
+vector<int> nbr[100001];
 bool chk[100001];
-
+int ind =0;
 // ar, chk, nbr.
 void bfs()
 {
@@ -51,13 +51,15 @@ dfs(int root=1)
 	// static int ind=0;
 	// order[ind++]=root;
 	chk[root]=1;
+	ar[ind++]=root;
+	//tin[root]=time++;
 	for(int nd:nbr[root])
 		if(chk[nd]==0)
 		{
 			// par[nd]=root;
 			dfs(nd);
 		}
-	
+	tout[root]=time++;
 	
 }
 
@@ -86,7 +88,6 @@ void dfs2()
 main()
 {
 		int n,n1,n2;
-		nbr.clear();
 		cin>>n;
 		fr(i,n-1)
 		{
@@ -98,6 +99,8 @@ main()
 		fr(i,n) pr order[i] sp;
 		// pr "bfs: ";for(int i=0;i<n;i++) pr ar[i] sp;pr endl;//pppppppppppppppppppppppppp
 		
+		
+		fr(int i=1;i<=n;++i) nbr[i].clear();
 }
 
 /*
@@ -106,7 +109,7 @@ main()
 1 3
 2 4
 2 5
-2 6
+5 6
 
 */
 

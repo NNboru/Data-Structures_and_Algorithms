@@ -12,7 +12,7 @@ ll valuesumcomb(int n,int r1,int r2)
 	return sumcomb[n][r2]-sumcomb[n][r1-1];
 }
 
-	fr(i,1001)
+	for(int i=0;i<1001;i++)
 	{
 		comb[i][0]=1;
 		comb[i][i]=1;

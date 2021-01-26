@@ -9,31 +9,29 @@
 using namespace std;
 typedef long long ll;
 
-ll mat[30][30],adj[31][31],N;
+ll mat[31][31],adj[31][31],N;
 
-int bez(int a,int m)
+int modInv(int a, int m)
 {
-	//Returns Modular inverse of a%m such that (a*ans)%m=gcd(a,m).
-	// a should not be -ve, becoz mod return -ve.
-	int siz=0,qar[10000],mc=m,q,r;
-	q=a/m;
-	r=a%m;
-	while(r!=0)
-	{
-		qar[siz++]=q;
-		a=m;
-		m=r;
-		q=a/m;
-		r=a%m;
-	}
-	qar[siz++]=1;
-	for(int i=siz-3;i>=0;i--)
-		qar[i]=qar[i]*qar[i+1]+qar[i+2];
-	if(siz%2) return mc-qar[1];
-	return qar[1];
+    int m0 = m;
+    int y = 0, x = 1, t;
+    while (a > 1)
+    {
+        // Update y and x
+        t = y;
+        y = x - (a/m0) * y;
+        x = t;
+        t = m0;
+        // m is remainder now, process same as Euclid's algo
+        m0 = a % m0;
+		a = t;
+    }
+    if (x < 0)
+       x += m;
+    return x;
 }
 
-int determinantOfMatrix(ll mat[30][30],int n)   
+int determinantOfMatrix(ll mat[31][31],int n)   
 {   
     ll num1,num2,det = 1,index,total = 1;   
 	
@@ -54,13 +52,13 @@ int determinantOfMatrix(ll mat[30][30],int n)
     {   
         det =( det * mat[i][i])%MOD;
     }
-	// pr det sp<<total sp<<bez(total,MOD) en;
+	// pr det sp<<total sp<<modInv(total,MOD) en;
 	if(total<0)
 	{
 		total=-total;
 		det=-det;
 	}
-    return (det*bez(total,MOD))%MOD;
+    return (det*modInv(total,MOD))%MOD;
 }
 
 main()

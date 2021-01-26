@@ -1,3 +1,4 @@
+// if element(k) is not found, it returns the index where k should be inserted.
 ll bisearch(int fi,int la,int k)
 {
 	int ind,lac=la;

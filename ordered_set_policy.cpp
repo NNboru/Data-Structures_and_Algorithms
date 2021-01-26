@@ -28,7 +28,7 @@ int main()
 	cout<<p.size() <<endl;
 	if(*p.find(6)==6)
 		cout<< 6 <<" exists."<<endl;
-	if(*p.find(6)!=3)
+	if(*p.find(3)!=3)
 		cout<< 3 <<" does not exists."<<endl;
 	p.erase(p.find_by_order(2));
 	

@@ -110,7 +110,6 @@ void dijkstra(int root)
 	}
 }
 
-
 main()
 {
 	ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
@@ -133,8 +132,6 @@ main()
 	// dijkstra(2);
 	// for(int i=1;i<=N;i++) pr dis[i] sp; pr endl;
 	// for(int i=1;i<=N;i++) pr path[i] sp; pr endl;
-	
-	
 }
 /*
 6 9
