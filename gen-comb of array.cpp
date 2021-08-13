@@ -12,12 +12,12 @@
 using namespace std;
 typedef long long ll;
 
-int ar[100001]={1,2,3,4,5,6},sel[100001],ind=0,n=6,r=3;
+int ar[101]={1,2,3,4,5,6},sel[101],n=6,r=3;
 
 //Generating combi to select r elements from n elem of ar.
-void combi(int c,int pos)
+void combi(int remain,int pos) // selecting remain items from ar[pos:]
 {
-	if(c==0)
+	if(remain==0)
 	{
 		//a combi is ready.
 		fr(i,r)
@@ -26,18 +26,16 @@ void combi(int c,int pos)
 	}
 	else
 	{
-		for(int i=pos;i<=n-c;i++)
+		for(int i=pos;i<=n-remain;i++)
 		{
-			sel[ind++]=ar[i];
-			combi(c-1,i+1);
-			ind--;
+			sel[r-remain]=ar[i];
+			combi(remain-1,i+1);
 		}
 	}
 }
 
 main()
 {
-	ind=0;
 	combi(r,0);
 	
 	

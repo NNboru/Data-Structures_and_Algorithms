@@ -10,11 +10,10 @@
 #define pr cout<<
 #define en <<endl
 #define sp <<' '
-#define N 10
 using namespace std;
 typedef long long ll;
 
-int ar[100001];
+int ar[100001], N;
 struct node
 {
 	int l=0,r=0,val=0,cnt=0;
@@ -80,19 +79,19 @@ int addseg(int oldr, int l, int r, int pos, int val)
 
 main()
 {
-	ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-	int n,m ;
+	// ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+	int m ;
 	
-	cin>>n ;
-	for(int i=1;i<=n;i++)
+	cin>>N ;
+	for(int i=1;i<=N;i++)
 		cin>>ar[i];
 	
 	// making persistent segment tree for ar.
-	for(int i=1;i<=n;i++)
+	for(int i=1;i<=N;i++)
 	{
 		root[i] = addseg(root[i-1],1,N,ar[i],ar[i]);
 	}
-	dfs(root[n]);
+	dfs(root[N]);
 	
 }
 

@@ -30,7 +30,7 @@ void multiply(int mat1[][31], int mat2[][31], int res[][31], int p, int q, int r
 
 main()
 {
-	ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+	//ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 	
 	multiply(ar1,ar2,res,2,3,1);
 	fr(i,2)

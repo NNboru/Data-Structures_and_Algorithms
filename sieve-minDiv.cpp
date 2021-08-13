@@ -39,8 +39,8 @@ void build_sieve(int n) {
 	}
 }
 
-// making factors of N using sieve.
-int divs[100][100],sz[100],cnt;
+// making factors of N using sieve. Taking max no of prime factors = 10.
+int divs[10][100],sz[10],cnt;
 void facs(int ind,int prod)
 {
 	// needs divs, cnt.
@@ -62,7 +62,7 @@ void facs(int ind,int prod)
 }
 int factors(int n)
 {
-	// max no of prime factors = 10.
+	// taking max no of prime factors = 10.
 	for(int i=0;i<10;++i)
 	{
 		sz[i]=1;
